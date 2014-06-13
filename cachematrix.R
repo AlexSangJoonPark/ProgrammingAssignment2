@@ -1,16 +1,17 @@
 ## Coursera - R Programming
 ## Programming Assignment 2
 ## SangJoon Park
-
-## Two functions provide caching feature of inverse of a matrix.
-## cacheSolve function caches the inversed matrix after the first execution. 
-
-## makeCacheMatrix is a function to return list object which is containing four functions.
 ##
-## set : set an inversable matrix
-## get : get the value of the inversable matrix
-## setinversematrix : set the value of the inversed matrix
-## getinversematrix : get the value of the inversed matrix
+## Two functions provide caching feature of inverse of a matrix.
+## These functions are usaful when user need to inverse a same matrix several times, 
+## because cacheSolve function caches the inversed matrix value. 
+
+## makeCacheMatrix is a function to return a list which is containing four functions.
+## The internal functions are like the below;
+## - set : set an matrix (inversable)
+## - get : get an matrix (inversable)
+## - setinversematrix : set the value of the inversed matrix
+## - getinversematrix : get the value of the inversed matrix
 ## 
 makeCacheMatrix <- function(x = matrix()) {
     im <- NULL                              # init variable of inversed matrix
@@ -46,5 +47,3 @@ cacheSolve <- function(x, ...) {
     x$setinversematrix(im)                  # set the inversed matrix for caching
     im                                      # return the inversed matrix of 'x'
 }
-
-

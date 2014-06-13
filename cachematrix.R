@@ -13,15 +13,17 @@
 ## getinversematrix : get the value of the inversed matrix
 ## 
 makeCacheMatrix <- function(x = matrix()) {
-    im <- NULL
-    set <- function(y) {
-        x <<- y
-        im <<- NULL
+    im <- NULL                              # init variable of inversed matrix
+    
+    set <- function(y) {                    
+        x <<- y                             # set a matrix of 'x'
+        im <<- NULL                         # clear a inversed matrix
     }
     get <- function() x
-    setinversematrix <- function(m) im <<- m
-    getinversematrix <- function() im
-    list(set = set, get = get,
+    setinversematrix <- function(m) im <<- m # set a inversed matrix for caching
+    getinversematrix <- function() im       # get a cached inversed matrix
+    
+    list(set = set, get = get,              # return list of four functions
          setinversematrix = setinversematrix,
          getinversematrix = getinversematrix)
 }
@@ -32,16 +34,17 @@ makeCacheMatrix <- function(x = matrix()) {
 ## From second call, cached value is returned with a message.
 ##
 cacheSolve <- function(x, ...) {
-    ## Return a matrix that is the inverse of 'x'
-    im <- x$getinversematrix()
-    if(!is.null(im)) {
-        message("getting cached inversed matrix")
-        return(im)
+    
+    im <- x$getinversematrix()              # get cached inversed matrix
+    if(!is.null(im)) {                      # if the cached matrix exists
+        message("getting cached matrix")
+        return(im)                          # return the cached matrix
     }
-    m <- x$get()
-    im <- solve(m, ...)
-    x$setinversematrix(im)
-    im
+    
+    m <- x$get()                            # get a matrix
+    im <- solve(m, ...)                     # inverse the matrix
+    x$setinversematrix(im)                  # set the inversed matrix for caching
+    im                                      # return the inversed matrix of 'x'
 }
 
 
